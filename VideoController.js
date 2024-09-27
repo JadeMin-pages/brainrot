@@ -27,16 +27,24 @@ export class VideoController {
 		}
 	}
 
+	reversePlay() {
+		const reverseFrame = () => {
+			if (this.video.currentTime <= 0) {
+				this.reverseReset();
+			} else {
+				this.video.currentTime -= 0.03;
+			}
+		};
+
+		this.reverseInterval = setInterval(() => reverseFrame(), 30);
+		reverseFrame();
+	}
+
 	play() {
 		this.reverseReset();
 
-		if (this.reverse) {
-			const reverseFrame = () => {
-				if (this.video.currentTime <= 0) this.reverseReset();
-				else this.video.currentTime -= 0.03;
-			};
-			this.reverseInterval = setInterval(() => reverseFrame(), 30);
-			reverseFrame();
+		if (this.reverse === true) {
+			this.reversePlay();
 		} else {
 			this.video.play();
 		}
