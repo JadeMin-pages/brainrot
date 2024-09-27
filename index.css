@@ -15,12 +15,10 @@ body {
 
 #video-container {
 	width: auto;
-	height: 80%;
+	height: 70%;
 
 	> video {
 		height: 100%;
-	
-		overflow: hidden;
 	}
 }
 input[type="file"] {
