@@ -14,8 +14,8 @@ body {
 }
 
 video {
-	width: 600px;
-	height: auto;
+	width: auto;
+	height: 70%;
 
 	overflow: hidden;
 }
