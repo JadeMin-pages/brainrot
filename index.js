@@ -1,14 +1,17 @@
 import { VideoController } from "./VideoController.js";
 
+/** @type {HTMLVideoElement | null} */
 const video = document.querySelector("video");
+if (video === null) throw new Error("'video' element not found.");
+
 /** @type {HTMLInputElement | null} */
 const upload = document.querySelector("input[type=file]");
-if (video === null) throw new Error("'video' element not found.");
 if (upload === null) throw new Error("'input[type=file]' element is not found.");
+
 /** @type {HTMLSourceElement | null} */
 const videoSrc = video.querySelector("source");
 if (
-	videoSrc !== null &&
+	videoSrc === null ||
 	!(videoSrc instanceof HTMLSourceElement)
 ) throw new Error("'source' element is not found.");
 
