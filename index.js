@@ -19,11 +19,15 @@ if (
 
 const controller = new VideoController(video);
 
-video.addEventListener('mouseenter touchstart', () => {
+video.addEventListener('mouseenter touchstart', e => {
+	e.preventDefault();
+	
 	controller.reverse = false; 
 	controller.play();
 });
-video.addEventListener('mouseleave touchend', () => {
+video.addEventListener('mouseleave touchend', e => {
+	e.preventDefault();
+	
 	controller.reverse = true; 
 	controller.play();
 });
