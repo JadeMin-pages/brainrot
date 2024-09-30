@@ -13,6 +13,7 @@ body {
 	background: black;
 }
 
+
 #video-container {
 	width: auto;
 	height: 70%;
@@ -21,6 +22,9 @@ body {
 		height: 100%;
 	}
 }
-input[type="file"] {
-	color: white;
+
+#upload-container {
+	> input[type="file"] {
+		color: white;
+	}
 }
