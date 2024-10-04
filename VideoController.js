@@ -15,10 +15,10 @@ export class VideoController {
 
 
 	isReady() {
-		return this.video.readyState === 3;
+		return this.video.readyState >= 3;
 	}
 
-	reverseReset() {
+	#reverseReset() {
 		this.video.pause();
 
 		if (this.reverseInterval !== null) {
@@ -27,10 +27,10 @@ export class VideoController {
 		}
 	}
 
-	reversePlay() {
+	#reversePlay() {
 		const reverseFrame = () => {
 			if (this.video.currentTime <= 0) {
-				this.reverseReset();
+				this.#reverseReset();
 			} else {
 				this.video.currentTime -= 0.03;
 			}
@@ -41,19 +41,12 @@ export class VideoController {
 	}
 
 	play() {
-		this.reverseReset();
+		this.#reverseReset();
 
 		if (this.reverse === true) {
-			this.reversePlay();
+			this.#reversePlay();
 		} else {
 			this.video.play();
 		}
 	}
-	/*pause() {
-		if (!this.hasSource()) return;
-
-		this.reverseReset();
-
-		this.video.pause();
-	}*/
 }

@@ -1,26 +1,16 @@
+import { querySelector_s } from "./domUtils.js";
 import { VideoController } from "./VideoController.js";
 
-/** @type {HTMLVideoElement | null} */
-const video = document.querySelector("video");
-if (video === null) throw new Error("'video' element not found.");
-
-/** @type {HTMLInputElement | null} */
-const upload = document.querySelector("input[type=file]");
-if (upload === null) throw new Error("'input[type=file]' element is not found.");
-
-/** @type {HTMLSourceElement | null} */
-const videoSrc = video.querySelector("source");
-if (
-	videoSrc === null ||
-	!(videoSrc instanceof HTMLSourceElement)
-) throw new Error("'source' element is not found.");
+const video = querySelector_s("video", HTMLVideoElement);
+const upload = querySelector_s("input[type=file]", HTMLInputElement);
+const videoSrc = querySelector_s("source", HTMLSourceElement);
 
 
 
 const controller = new VideoController(video);
 
 ["mouseenter", "touchstart"].forEach(eventName => {
-	video.addEventListener(eventName, e => {
+	video.addEventListener(eventName, /** @param {MouseEvent | TouchEvent} e */ e => {
 		e.preventDefault();
 		
 		controller.reverse = false; 
@@ -28,7 +18,7 @@ const controller = new VideoController(video);
 	});
 });
 ["mouseleave", "touchend"].forEach(eventName => {
-	video.addEventListener(eventName, e => {
+	video.addEventListener(eventName, /** @param {MouseEvent | TouchEvent} e */ e => {
 		e.preventDefault();
 
 		controller.reverse = true; 
@@ -37,9 +27,9 @@ const controller = new VideoController(video);
 });
 
 upload.addEventListener('change', async () => {
-	const file = upload.files[0];
-	if (file === undefined) return;
+	const files = upload.files;
+	if (files === null) return;
 
-	videoSrc.src = URL.createObjectURL(file);
+	videoSrc.src = URL.createObjectURL(files[0]);
 	video.load();
 });
