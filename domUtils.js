@@ -23,14 +23,14 @@ class DOMTypeError extends Error {
  * @returns {T}
  */
 export function querySelector_s(selector, typeInstance) {
-    const element = document.querySelector(selector);
+	const element = document.querySelector(selector);
 	
-    if (element === null) {
-        throw new DOMQueryError(`Cannot find element by selector: "${selector}"`);
-    }
+	if (element === null) {
+		throw new DOMQueryError(`Cannot find element by selector: "${selector}"`);
+	}
 	if (!(element instanceof typeInstance)) {
 		throw new DOMTypeError(`"${selector}": Expected <${typeInstance.name}>, but <${element.constructor.name}>`);
 	}
 
-    return element;
+	return element;
 }
